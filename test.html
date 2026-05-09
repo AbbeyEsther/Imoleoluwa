@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- create a test page where the user can input a message and the page will display the message back to the user. The user can also choose to clear the message or change the background color of the page. The page should also keep track of how many times the user has submitted a message and display that count on the page. -->
+    <h1>Test Page</h1>
+    <input type="text" id="messageInput" placeholder="Enter a message">
+    <button onclick="submitMessage()">Submit Message</button>
+    <button onclick="clearMessage()">Clear Message</button>
+    <button onclick="changeBackgroundColor()">Change Background Color</button>
+    <p id="messageDisplay"></p>
+    <p id="submitCount">Submit Count: 0</p>
+    <script>
+        let submitCount = 0;
+
+        function submitMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            if (message) {
+                const messageDisplay = document.getElementById('messageDisplay');
+                messageDisplay.textContent = `You submitted: "${message}"`;
+                submitCount++;
+                updateSubmitCount();
+                messageInput.value = '';
+            } else {
+                alert('Please enter a message.');
+            }
+        }
+
+        function clearMessage() {
+            const messageDisplay = document.getElementById('messageDisplay');
+            messageDisplay.textContent = '';
+        }
+
+        function changeBackgroundColor() {
+            const colors = ['#FF5733', '#33FF57', '#3357FF', '#F333FF', '#33FFF5'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+        }
+
+        function updateSubmitCount() {
+            const submitCountDisplay = document.getElementById('submitCount');
+            submitCountDisplay.textContent = `Submit Count: ${submitCount}`;
+        }
+    </script>
+
+
+</body>
+</html>
