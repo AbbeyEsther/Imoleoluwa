@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- create a dare game where the user can input a dare and the game will randomly select one of the dares to present to the user. The user can then choose to accept or decline the dare. If they accept, they must complete the dare and then input whether they completed it successfully or not. The game will keep track of the user's score based on how many dares they have completed successfully. -->
+    <h1>Dare Game</h1>
+    <input type="text" id="dareInput" placeholder="Enter a dare">
+    <button onclick="addDare()">Add Dare</button>
+    <button onclick="playGame()">Play Game</button>
+    <p id="dareDisplay"></p>
+    <p id="scoreDisplay">Score: 0</p>
+    <script>
+        let dares = [];
+        let score = 0;
+
+        function addDare() {
+            const dareInput = document.getElementById('dareInput');
+            const dare = dareInput.value.trim();
+            if (dare) {
+                dares.push(dare);
+                dareInput.value = '';
+                alert('Dare added!');
+            } else {
+                alert('Please enter a dare.');
+            }
+        }
+
+        function playGame() {
+            if (dares.length === 0) {
+                alert('No dares available. Please add some dares first.');
+                return;
+            }
+            const randomIndex = Math.floor(Math.random() * dares.length);
+            const selectedDare = dares[randomIndex];
+            const acceptDare = confirm(`Your dare is: "${selectedDare}". Do you accept?`);
+            if (acceptDare) {
+                const completed = confirm('Did you complete the dare successfully?');
+                if (completed) {
+                    score++;
+                    alert('Great job! Your score has been updated.');
+                } else {
+                    alert('Better luck next time!');
+                }
+                updateScore();
+            } else {
+                alert('You declined the dare. Maybe next time!');
+            }
+        }
+
+        function updateScore() {
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Score: ${score}`;
+        }
+    </script>
+</body>
+</html>
